@@ -1,17 +1,17 @@
-val kotlinVersion by extra { "1.9.20" }
+val kotlinVersion by extra { "2.1.10" }
 val junitVersion by extra { "5.8.1" }
 
 plugins {
-    kotlin("jvm") version "1.9.20"
-    id("org.jetbrains.dokka") version "1.9.10"
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    kotlin("jvm") version "2.1.10"
+    id("org.jetbrains.dokka") version "1.9.20"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     `java-library`
     `maven-publish`
     signing
 }
 
 group = "org.eljabali.sami.kotlinxdatetimefun"
-version = "3.0.0"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
@@ -60,8 +60,8 @@ publishing {
                 url.set("https://github.com/seljabali/kotlinx-datetime-fun")
                 licenses {
                     license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        name.set("MIT License")
+                        url.set("https://github.com/seljabali/kotlinx-datetime-fun/blob/main/LICENSE")
                     }
                 }
                 developers {

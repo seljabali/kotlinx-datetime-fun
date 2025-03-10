@@ -1,7 +1,9 @@
 package kotlinxdatetimefun.localtime.extensions
 
-import java.time.Duration
-import kotlinx.datetime.LocalTime
+import kotlinx.datetime.*
+import kotlinxdatetimefun.localdatetime.extensions.getPeriodDifference
+import kotlinxdatetimefun.localdatetime.extensions.withLocalTime
+import kotlinxdatetimefun.localdatetime.of
 
 // region Time Comparisons
 fun LocalTime.compareTime(toDate: LocalTime): Int =
@@ -11,9 +13,9 @@ fun LocalTime.compareTime(toDate: LocalTime): Int =
         else -> 1
     }
 
-fun LocalTime.isEqualTime(b: LocalTime): Boolean = this == b
+fun LocalTime.isEqualTime(b: LocalTime): Boolean = this.getNanoSecondDifference(b) == 0
 
-fun LocalTime.isBeforeTime(b: LocalTime): Boolean = this.isBefore(b)
+fun LocalTime.isBeforeTime(b: LocalTime): Boolean = this.getNanoSecondDifference(b) < 0
 
 fun LocalTime.isBeforeEqualTime(b: LocalTime): Boolean = compareTime(b) <= 0
 
@@ -22,14 +24,23 @@ fun LocalTime.isAfterTime(b: LocalTime): Boolean = compareTime(b) > 0
 fun LocalTime.isAfterEqualTime(b: LocalTime): Boolean = compareTime(b) >= 0
 // endregion
 
+fun LocalTime.getPeriodDifference(localTimeB: LocalTime): DateTimePeriod {
+    val localDateTimeA = LocalDateTime.of(2025, 1, 1).withLocalTime(this)
+    val localDateTimeB = LocalDateTime.of(2025, 1, 1).withLocalTime(localTimeB)
+    return localDateTimeA.getPeriodDifference(localDateTimeB)
+}
+
+fun LocalTime.getNanoSecondDifference(localTimeB: LocalTime): Int =
+    this.getPeriodDifference(localTimeB).nanoseconds
+
 fun LocalTime.getMilliSecondDifference(localTimeB: LocalTime): Int =
-    Duration.between(this, localTimeB).toMillis().toInt()
+    this.getPeriodDifference(localTimeB).nanoseconds / 1_000_000
 
 fun LocalTime.getSecondDifference(localTimeB: LocalTime): Int =
-    Duration.between(this, localTimeB).seconds.toInt()
+    this.getPeriodDifference(localTimeB).seconds
 
 fun LocalTime.getMinuteDifference(localTimeB: LocalTime): Int =
-    Duration.between(this, localTimeB).toMinutes().toInt()
+    this.getPeriodDifference(localTimeB).minutes
 
 fun LocalTime.getHourDifference(localTimeB: LocalTime): Int =
-    Duration.between(this, localTimeB).toHours().toInt()
+    this.getPeriodDifference(localTimeB).hours

@@ -1,8 +1,6 @@
 package kotlinxdatetimefun.localdatetime.extensions
 
-import java.time.Duration
-import kotlinx.datetime.LocalDateTime
-import java.time.temporal.ChronoUnit
+import kotlinx.datetime.*
 
 // region Day Comparisons
 fun LocalDateTime.compareDay(toDate: LocalDateTime): Int {
@@ -82,16 +80,11 @@ fun LocalDateTime.isAfterYear(localDateTimeB: LocalDateTime): Boolean =
 // endregion
 
 // region Time Comparisons
-fun LocalDateTime.compareTime(toDate: LocalDateTime): Int =
-    when {
-        this.isEqualTime(toDate) -> 0
-        this.isBeforeTime(toDate) -> -1
-        else -> 1
-    }
+fun LocalDateTime.compareTime(toDate: LocalDateTime): Int = this.compareTo(toDate)
 
-fun LocalDateTime.isEqualTime(b: LocalDateTime): Boolean = this.isEqual(b)
+fun LocalDateTime.isEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) == 0
 
-fun LocalDateTime.isBeforeTime(b: LocalDateTime): Boolean = this.isBefore(b)
+fun LocalDateTime.isBeforeTime(b: LocalDateTime): Boolean = this.compareTime(b) < 0
 
 fun LocalDateTime.isBeforeEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) <= 0
 
@@ -100,20 +93,23 @@ fun LocalDateTime.isAfterTime(b: LocalDateTime): Boolean = this.compareTime(b) >
 fun LocalDateTime.isAfterEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) >= 0
 // endregion
 
-fun LocalDateTime.getSecondDifference(localDateTimeB: LocalDateTime): Long =
-    Duration.between(this, localDateTimeB).toSeconds()
+fun LocalDateTime.getPeriodDifference(localDateTimeB: LocalDateTime): DateTimePeriod =
+    this.toInstant(TimeZone.UTC).periodUntil(localDateTimeB.toInstant(TimeZone.UTC), TimeZone.UTC)
 
-fun LocalDateTime.getMinuteDifference(localDateTimeB: LocalDateTime): Long =
-    Duration.between(this, localDateTimeB).toMinutes()
+fun LocalDateTime.getSecondDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).seconds
 
-fun LocalDateTime.getHourDifference(localDateTimeB: LocalDateTime): Long =
-    Duration.between(this, localDateTimeB).toHours()
+fun LocalDateTime.getMinuteDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).minutes
 
-fun LocalDateTime.getDayDifference(localDateTimeB: LocalDateTime): Long =
-    Duration.between(this.atStartOfDay(), localDateTimeB.atStartOfDay()).toDays()
+fun LocalDateTime.getHourDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).hours
 
-fun LocalDateTime.getMonthDifference(localDateTimeB: LocalDateTime): Long =
-    ChronoUnit.MONTHS.between(this, localDateTimeB)
+fun LocalDateTime.getDayDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).days
 
-fun LocalDateTime.getYearDifference(localDateTimeB: LocalDateTime): Long =
-    ChronoUnit.YEARS.between(this, localDateTimeB)
+fun LocalDateTime.getMonthDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).months
+
+fun LocalDateTime.getYearDifference(localDateTimeB: LocalDateTime): Int =
+    this.getPeriodDifference(localDateTimeB).years

@@ -1,9 +1,10 @@
 package kotlinxdatetimefun.localdate.extensions
 
-import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
+import kotlinx.datetime.*
+
+fun LocalDate.minusDays(days: Int): LocalDate = this.plus(days * -1, DateTimeUnit.DAY)
+
+fun LocalDate.plusDays(days: Int): LocalDate = this.plus(days * -1, DateTimeUnit.DAY)
 
 fun LocalDate.getLast(dayOfWeek: DayOfWeek, countingInThisDay: Boolean = false): LocalDate {
     if (countingInThisDay && this.dayOfWeek == dayOfWeek) {
@@ -33,4 +34,4 @@ fun LocalDate.getNext(dayOfWeek: DayOfWeek, countingInThisDay: Boolean = false):
     return nextLocalDate
 }
 
-fun LocalDate.atEndOfDay(): LocalDateTime = LocalDateTime.of(this, LocalTime.MAX)
+//fun LocalDate.atEndOfDay(): LocalDateTime = LocalDateTime.of(this, LocalTime.MAX)

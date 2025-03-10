@@ -1,7 +1,12 @@
 # Project files
+*.iml
 build/*
 .idea/*
 .gradle/*
+.kotlin
+
+# Mac
+.DS_Store
 
 # Compiled class file
 *.class

@@ -1,31 +1,31 @@
 package kotlinxdatetimefun.localdate
 
-import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.*
 import kotlinxdatetimefun.localdate.extensions.getLast
 import kotlinxdatetimefun.localdate.extensions.getNext
-import kotlinx.datetime.LocalDate
+import kotlinxdatetimefun.localdate.extensions.minusDays
+import kotlinxdatetimefun.localdate.extensions.plusDays
+import kotlinxdatetimefun.localdatetime.extensions.toLocalDate
 
-object LocalDates {
-    val today: LocalDate get() = LocalDate.now()
-    val yesterday: LocalDate get() = today.minusDays(1)
-    val tomorrow: LocalDate get() = today.plusDays(1)
+fun LocalDate.Companion.today(timeZone: TimeZone): LocalDate = Clock.System.now().toLocalDateTime(timeZone).toLocalDate()
+fun LocalDate.Companion.yesterday(timeZone: TimeZone): LocalDate = today(timeZone).minusDays(1)
+fun LocalDate.Companion.tomorrow(timeZone: TimeZone): LocalDate = today(timeZone).plusDays(1)
 
-    val lastMonday: LocalDate get() = today.getLast(DayOfWeek.MONDAY)
-    val lastTuesday: LocalDate get() = today.getLast(DayOfWeek.TUESDAY)
-    val lastWednesday: LocalDate get() = today.getLast(DayOfWeek.WEDNESDAY)
-    val lastThursday: LocalDate get() = today.getLast(DayOfWeek.THURSDAY)
-    val lastFriday: LocalDate get() = today.getLast(DayOfWeek.FRIDAY)
-    val lastSaturday: LocalDate get() = today.getLast(DayOfWeek.SATURDAY)
-    val lastSunday: LocalDate get() = today.getLast(DayOfWeek.SUNDAY)
+fun LocalDate.Companion.lastMonday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.MONDAY)
+fun LocalDate.Companion.lastTuesday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.TUESDAY)
+fun LocalDate.Companion.lastWednesday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.WEDNESDAY)
+fun LocalDate.Companion.lastThursday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.THURSDAY)
+fun LocalDate.Companion.lastFriday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.FRIDAY)
+fun LocalDate.Companion.lastSaturday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.SATURDAY)
+fun LocalDate.Companion.lastSunday(timeZone: TimeZone): LocalDate = today(timeZone).getLast(DayOfWeek.SUNDAY)
 
-    val nextMonday: LocalDate get() = today.getNext(DayOfWeek.MONDAY)
-    val nextTuesday: LocalDate get() = today.getNext(DayOfWeek.TUESDAY)
-    val nextWednesday: LocalDate get() = today.getNext(DayOfWeek.WEDNESDAY)
-    val nextThursday: LocalDate get() = today.getNext(DayOfWeek.THURSDAY)
-    val nextFriday: LocalDate get() = today.getNext(DayOfWeek.FRIDAY)
-    val nextSaturday: LocalDate get() = today.getNext(DayOfWeek.SATURDAY)
-    val nextSunday: LocalDate get() = today.getNext(DayOfWeek.SUNDAY)
+fun LocalDate.Companion.nextMonday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.MONDAY)
+fun LocalDate.Companion.nextTuesday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.TUESDAY)
+fun LocalDate.Companion.nextWednesday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.WEDNESDAY)
+fun LocalDate.Companion.nextThursday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.THURSDAY)
+fun LocalDate.Companion.nextFriday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.FRIDAY)
+fun LocalDate.Companion.nextSaturday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.SATURDAY)
+fun LocalDate.Companion.nextSunday(timeZone: TimeZone): LocalDate = today(timeZone).getNext(DayOfWeek.SUNDAY)
 
-    val firstDayOfThisYear: LocalDate get() = LocalDateUtil.new(today.year, 1, 1)
-    val lastDayOfThisYear: LocalDate get() = LocalDateUtil.new(today.year, 12, 31)
-}
+fun LocalDate.Companion.firstDayOfTheYear(timeZone: TimeZone): LocalDate = LocalDate(LocalDate.today(timeZone).year, 1, 1)
+fun LocalDate.Companion.lastDayOfTheYear(timeZone: TimeZone): LocalDate = LocalDate(LocalDate.today(timeZone).year, 12, 31)

@@ -1,6 +1,9 @@
 package kotlinxdatetimefun.localtime.extensions
 
 import kotlinx.datetime.LocalTime
+import kotlinxdatetimefun.localtime.MAX
+import kotlinxdatetimefun.localtime.MIN
+import kotlinxdatetimefun.localtime.NOON
 
 fun LocalTime.isAtStartOfDay(): Boolean = this == LocalTime.MIN
 

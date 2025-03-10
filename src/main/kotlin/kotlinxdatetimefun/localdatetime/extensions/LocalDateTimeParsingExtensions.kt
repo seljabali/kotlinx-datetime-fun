@@ -3,8 +3,9 @@ package kotlinxdatetimefun.localdatetime.extensions
 import kotlinxdatetimefun.localdate.extensions.toLocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinxdatetimefun.localtime.MIN
 
 /**
  * Works off of String representations of date(time) and parses through the following attempts in order when
@@ -26,7 +27,7 @@ fun String.toLocalDateTime(format: String? = null): LocalDateTime? {
     }
     val localDate = this.toLocalDate(format)
     if (localDate != null) {
-        return LocalDateTime.of(localDate, LocalTime.MIN)
+        return LocalDateTime(localDate, LocalTime.MIN)
     }
     return null
 }
@@ -35,16 +36,16 @@ private fun parseLocalDateTimeHelper(dateText: String, format: String?): LocalDa
     if (format.isNullOrEmpty())
         try {
             LocalDateTime.parse(dateText)
-        } catch (e: DateTimeParseException) {
-            null
         } catch (e: IllegalArgumentException) {
             null
         }
     else {
         try {
-            LocalDateTime.parse(dateText, DateTimeFormatter.ofPattern(format))
-        } catch (e: DateTimeParseException) {
-            null
+            @OptIn(FormatStringsInDatetimeFormats::class)
+            val dateTimeFormat = LocalDateTime.Format {
+                byUnicodePattern(format)
+            }
+            dateTimeFormat.parse(dateText)
         } catch (e: IllegalArgumentException) {
             null
         }
