@@ -1,7 +1,7 @@
 package kotlinxdatetimefun.localdate.extensions
 
 import kotlinx.datetime.LocalDate
-import kotlin.time.Duration
+import kotlinx.datetime.periodUntil
 
 // region Day Comparisons
 fun LocalDate.compareDay(toDate: LocalDate): Int {
@@ -74,20 +74,20 @@ fun LocalDate.isAfterEqualYear(localDateB: LocalDate): Boolean = this.year >= lo
 fun LocalDate.isAfterYear(localDateB: LocalDate): Boolean = this.year > localDateB.year
 // endregion
 
-fun LocalDate.getSecondDifference(localDateB: LocalDate): Long =
-    Duration.between(this.atStartOfDay(), localDateB.atStartOfDay()).toSeconds()
+fun LocalDate.getSecondDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).seconds
 
-fun LocalDate.getMinuteDifference(localDateB: LocalDate): Long =
-    Duration.between(this.atStartOfDay(), localDateB.atStartOfDay()).toMinutes()
+fun LocalDate.getMinuteDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).minutes
 
-fun LocalDate.getHourDifference(localDateB: LocalDate): Long =
-    Duration.between(this.atStartOfDay(), localDateB.atStartOfDay()).toHours()
+fun LocalDate.getHourDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).hours
 
-fun LocalDate.getDayDifference(localDateB: LocalDate): Long =
-    ChronoUnit.DAYS.between(this, localDateB)
+fun LocalDate.getDayDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).days
 
-fun LocalDate.getMonthDifference(localDateB: LocalDate): Long =
-    ChronoUnit.MONTHS.between(this, localDateB)
+fun LocalDate.getMonthDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).months
 
-fun LocalDate.getYearDifference(localDateB: LocalDate): Long =
-    ChronoUnit.YEARS.between(this, localDateB)
+fun LocalDate.getYearDifference(localDateB: LocalDate): Int =
+    this.periodUntil(localDateB).years
