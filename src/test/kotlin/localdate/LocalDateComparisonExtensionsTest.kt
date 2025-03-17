@@ -49,14 +49,14 @@ class LocalDateComparisonExtensionsTest {
     @Test
     fun `given 2 dateTimes 3 years apart, then should see such differences in comparing`() {
         // given
-        // 2021-06-08 3:30 PM
+        // 2021-06-08
         val dateA = LocalDate(
             year = 2021,
             monthNumber = 6,
             dayOfMonth = 8,
         )
 
-        // 2024-06-08 3:30 PM
+        // 2024-06-08
         val dateB = LocalDate(
             year = 2024,
             monthNumber = 6,
