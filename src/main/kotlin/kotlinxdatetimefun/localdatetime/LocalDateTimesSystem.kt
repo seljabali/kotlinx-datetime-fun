@@ -1,6 +1,7 @@
 package kotlinxdatetimefun.localdatetime
 
-import kotlinx.datetime.*
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 
 fun LocalDateTime.Companion.nowSystem() = LocalDateTime.now(TimeZone.currentSystemDefault())
 fun LocalDateTime.Companion.todaySystem() = LocalDateTime.today(TimeZone.currentSystemDefault())

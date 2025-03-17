@@ -1,13 +1,18 @@
 package kotlinxdatetimefun.localdate
 
-import kotlinx.datetime.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.DayOfWeek
 import kotlinxdatetimefun.localdate.extensions.getLast
 import kotlinxdatetimefun.localdate.extensions.getNext
 import kotlinxdatetimefun.localdate.extensions.minusDays
 import kotlinxdatetimefun.localdate.extensions.plusDays
 import kotlinxdatetimefun.localdatetime.extensions.toLocalDate
 
-fun LocalDate.Companion.today(timeZone: TimeZone): LocalDate = Clock.System.now().toLocalDateTime(timeZone).toLocalDate()
+fun LocalDate.Companion.now(timeZone: TimeZone): LocalDate = Clock.System.now().toLocalDateTime(timeZone).toLocalDate()
+fun LocalDate.Companion.today(timeZone: TimeZone): LocalDate = LocalDate.now(timeZone)
 fun LocalDate.Companion.yesterday(timeZone: TimeZone): LocalDate = today(timeZone).minusDays(1)
 fun LocalDate.Companion.tomorrow(timeZone: TimeZone): LocalDate = today(timeZone).plusDays(1)
 

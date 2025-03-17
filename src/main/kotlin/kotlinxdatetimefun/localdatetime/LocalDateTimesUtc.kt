@@ -1,6 +1,7 @@
 package kotlinxdatetimefun.localdatetime
 
-import kotlinx.datetime.*
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 
 fun LocalDateTime.Companion.nowUtc() = LocalDateTime.now(TimeZone.UTC)
 fun LocalDateTime.Companion.todayUtc() = LocalDateTime.today(TimeZone.UTC)

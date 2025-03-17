@@ -1,6 +1,6 @@
 package localtime
 
-import kotlinxdatetimefun.localtime.LocalTimeUtil
+import kotlinx.datetime.LocalTime
 import kotlinxdatetimefun.localtime.extensions.getHourDifference
 import kotlinxdatetimefun.localtime.extensions.getMilliSecondDifference
 import kotlinxdatetimefun.localtime.extensions.getMinuteDifference
@@ -14,15 +14,15 @@ class LocalTimeComparisonExtensionsTest {
     fun `given 2 times 1hr and 10m apart, then should see such differences in comparing`() {
         // given
         // 3:30 PM
-        val dateA = LocalTimeUtil.new(
-            hourIn24 = 15,
+        val dateA = LocalTime(
+            hour = 15,
             minute = 30,
             second = 0,
         )
 
         // 4:40 PM
-        val dateB = LocalTimeUtil.new(
-            hourIn24 = 16,
+        val dateB = LocalTime(
+            hour = 16,
             minute = 40,
             second = 0,
         )
@@ -44,15 +44,15 @@ class LocalTimeComparisonExtensionsTest {
     fun `given 2 times and no time apart, then should see such differences in comparing`() {
         // given
         // 3:30 PM
-        val dateA = LocalTimeUtil.new(
-            hourIn24 = 15,
+        val dateA = LocalTime(
+            hour = 15,
             minute = 30,
             second = 0,
         )
 
         // 3:30 PM
-        val dateB = LocalTimeUtil.new(
-            hourIn24 = 15,
+        val dateB = LocalTime(
+            hour = 15,
             minute = 30,
             second = 0,
         )

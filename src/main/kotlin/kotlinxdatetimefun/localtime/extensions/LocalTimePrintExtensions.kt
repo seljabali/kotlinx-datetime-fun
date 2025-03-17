@@ -1,8 +1,13 @@
 package kotlinxdatetimefun.localtime.extensions
 
 import kotlinx.datetime.LocalTime
-import java.time.format.DateTimeFormatterBuilder
-import java.util.Locale
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 
-fun LocalTime.print(format: String, locale: Locale = Locale.US): String =
-    this.format(DateTimeFormatterBuilder().appendPattern(format).toFormatter(locale))
+@OptIn(FormatStringsInDatetimeFormats::class)
+fun LocalTime.print(format: String): String {
+    val dateFormat = LocalTime.Format {
+        byUnicodePattern(format)
+    }
+    return dateFormat.format(this)
+}

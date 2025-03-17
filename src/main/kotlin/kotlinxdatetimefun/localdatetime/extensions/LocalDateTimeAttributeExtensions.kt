@@ -1,12 +1,9 @@
 package kotlinxdatetimefun.localdatetime.extensions
 
 import kotlinx.datetime.LocalDateTime
+import kotlinxdatetimefun.isLeapYear
 
-fun LocalDateTime.isInLeapYear(): Boolean = when {
-    year % 4 != 0 -> false
-    year % 100 == 0 -> year % 400 == 0
-    else -> true
-}
+fun LocalDateTime.isInLeapYear(): Boolean = isLeapYear(this.year)
 
 fun LocalDateTime.isAtStartOfDay(): Boolean = this.isEqualTime(this.atStartOfDay())
 

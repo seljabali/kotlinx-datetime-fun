@@ -1,8 +1,8 @@
 package kotlinxdatetimefun.localdate.extensions
 
 import kotlinx.datetime.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 
 /**
  * Works off of String representations of date, without time, nor time zone.
@@ -12,20 +12,20 @@ import java.time.format.DateTimeParseException
  * @param format String representing format that should solely be used when parsing the date.
  * @return LocalDate? Null means couldn't parse, else parsed LocalDate.
  */
+@OptIn(FormatStringsInDatetimeFormats::class)
 fun String.toLocalDate(format: String? = null): LocalDate? =
     if (format.isNullOrEmpty()) {
         try {
             LocalDate.parse(this)
-        } catch (e: DateTimeParseException) {
-            null
         } catch (e: IllegalArgumentException) {
             null
         }
     } else {
         try {
-            LocalDate.parse(this, DateTimeFormatter.ofPattern(format))
-        } catch (e: DateTimeParseException) {
-            null
+            val localDateFormat = LocalDate.Format {
+                byUnicodePattern(format)
+            }
+            LocalDate.parse(this, localDateFormat)
         } catch (e: IllegalArgumentException) {
             null
         }

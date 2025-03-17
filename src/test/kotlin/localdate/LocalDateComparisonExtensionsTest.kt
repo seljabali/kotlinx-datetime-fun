@@ -1,6 +1,6 @@
 package localdate
 
-import kotlinxdatetimefun.localdate.LocalDateUtil
+import kotlinx.datetime.LocalDate
 import kotlinxdatetimefun.localdate.extensions.getDayDifference
 import kotlinxdatetimefun.localdate.extensions.getHourDifference
 import kotlinxdatetimefun.localdate.extensions.getMinuteDifference
@@ -16,17 +16,17 @@ class LocalDateComparisonExtensionsTest {
     fun `given 2 dates 0 days apart, then should see such differences in comparing`() {
         // given
         // 2021-06-08
-        val dateA = LocalDateUtil.new(
+        val dateA = LocalDate(
             year = 2021,
-            month = 6,
-            day = 8,
+            monthNumber = 6,
+            dayOfMonth = 8,
         )
 
         // 2021-06-08
-        val dateB = LocalDateUtil.new(
+        val dateB = LocalDate(
             year = 2021,
-            month = 6,
-            day = 8,
+            monthNumber = 6,
+            dayOfMonth = 8,
         )
 
         // when
@@ -50,17 +50,17 @@ class LocalDateComparisonExtensionsTest {
     fun `given 2 dateTimes 3 years apart, then should see such differences in comparing`() {
         // given
         // 2021-06-08 3:30 PM
-        val dateA = LocalDateUtil.new(
+        val dateA = LocalDate(
             year = 2021,
-            month = 6,
-            day = 8,
+            monthNumber = 6,
+            dayOfMonth = 8,
         )
 
         // 2024-06-08 3:30 PM
-        val dateB = LocalDateUtil.new(
+        val dateB = LocalDate(
             year = 2024,
-            month = 6,
-            day = 8,
+            monthNumber = 6,
+            dayOfMonth = 8,
         )
 
         // when

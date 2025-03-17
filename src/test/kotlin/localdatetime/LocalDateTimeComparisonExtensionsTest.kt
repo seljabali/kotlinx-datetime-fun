@@ -1,6 +1,6 @@
 package localdatetime
 
-import kotlinxdatetimefun.localdatetime.LocalDateTimeUtil
+import kotlinx.datetime.LocalDateTime
 import kotlinxdatetimefun.localdatetime.extensions.getDayDifference
 import kotlinxdatetimefun.localdatetime.extensions.getHourDifference
 import kotlinxdatetimefun.localdatetime.extensions.getMinuteDifference
@@ -15,25 +15,25 @@ class LocalDateTimeComparisonExtensionsTest {
     fun `given 2 dateTimes 1hr and 10m apart, then should see such differences in comparing`() {
         // given
         // 2021-06-08 3:30 PM
-        val dateA = LocalDateTimeUtil.new(
+        val dateA = LocalDateTime(
             year = 2021,
-            month = 6,
-            day = 8,
-            hourIn24 = 15,
+            monthNumber = 6,
+            dayOfMonth = 8,
+            hour = 15,
             minute = 30,
             second = 0,
-            nano = 0
+            nanosecond = 0
         )
 
         // 2021-06-08 4:40 PM
-        val dateB = LocalDateTimeUtil.new(
+        val dateB = LocalDateTime(
             year = 2021,
-            month = 6,
-            day = 8,
-            hourIn24 = 16,
+            monthNumber = 6,
+            dayOfMonth = 8,
+            hour = 16,
             minute = 40,
             second = 0,
-            nano = 0
+            nanosecond = 0
         )
 
         // when
@@ -55,25 +55,25 @@ class LocalDateTimeComparisonExtensionsTest {
     fun `given 2 dateTimes 3 years apart, then should see such differences in comparing`() {
         // given
         // 2021-06-08 3:30 PM
-        val dateA = LocalDateTimeUtil.new(
+        val dateA = LocalDateTime(
             year = 2021,
-            month = 6,
-            day = 8,
-            hourIn24 = 15,
+            monthNumber = 6,
+            dayOfMonth = 8,
+            hour = 15,
             minute = 30,
             second = 0,
-            nano = 0
+            nanosecond = 0
         )
 
         // 2024-06-08 3:30 PM
-        val dateB = LocalDateTimeUtil.new(
+        val dateB = LocalDateTime(
             year = 2024,
-            month = 6,
-            day = 8,
-            hourIn24 = 15,
+            monthNumber = 6,
+            dayOfMonth = 8,
+            hour = 15,
             minute = 30,
             second = 0,
-            nano = 0
+            nanosecond = 0
         )
 
         // when
