@@ -3,12 +3,18 @@ package kotlinxdatetimefun.localdatetime.extensions
 import kotlinx.datetime.DateTimePeriod
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.daysUntil
+import kotlinx.datetime.monthsUntil
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.periodUntil
+import kotlinx.datetime.yearsUntil
 
 // region Day Comparisons
-fun LocalDateTime.compareDay(toDate: LocalDateTime): Int {
-    val dayDifference = this.getDayDifference(toDate)
+fun LocalDateTime.compareDay(
+    toDate: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int {
+    val dayDifference = this.getDayDifference(toDate, timeZone)
     return when {
         dayDifference > 0 -> -1
         dayDifference < 0 -> 1
@@ -16,15 +22,30 @@ fun LocalDateTime.compareDay(toDate: LocalDateTime): Int {
     }
 }
 
-fun LocalDateTime.isEqualDay(b: LocalDateTime): Boolean = this.compareDay(b) == 0
+fun LocalDateTime.isEqualDay(
+    b: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Boolean = this.compareDay(b, timeZone) == 0
 
-fun LocalDateTime.isBeforeDay(b: LocalDateTime): Boolean = this.compareDay(b) < 0
+fun LocalDateTime.isBeforeDay(
+    b: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Boolean = this.compareDay(b, timeZone) < 0
 
-fun LocalDateTime.isBeforeEqualDay(b: LocalDateTime): Boolean = this.compareDay(b) <= 0
+fun LocalDateTime.isBeforeEqualDay(
+    b: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Boolean = this.compareDay(b, timeZone) <= 0
 
-fun LocalDateTime.isAfterDay(b: LocalDateTime): Boolean = this.compareDay(b) > 0
+fun LocalDateTime.isAfterDay(
+    b: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Boolean = this.compareDay(b, timeZone) > 0
 
-fun LocalDateTime.isAfterEqualDay(b: LocalDateTime): Boolean = this.compareDay(b) >= 0
+fun LocalDateTime.isAfterEqualDay(
+    b: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Boolean = this.compareDay(b, timeZone) >= 0
 // endregion
 
 // region Month Comparisons
@@ -97,23 +118,43 @@ fun LocalDateTime.isAfterTime(b: LocalDateTime): Boolean = this.compareTime(b) >
 fun LocalDateTime.isAfterEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) >= 0
 // endregion
 
-fun LocalDateTime.getPeriodDifference(localDateTimeB: LocalDateTime): DateTimePeriod =
-    this.toInstant(TimeZone.UTC).periodUntil(localDateTimeB.toInstant(TimeZone.UTC), TimeZone.UTC)
+fun LocalDateTime.getPeriodDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): DateTimePeriod =
+    this.toInstant(timeZone).periodUntil(localDateTimeB.toInstant(timeZone), timeZone)
 
-fun LocalDateTime.getSecondDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).seconds
+fun LocalDateTime.getSecondDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int =
+    this.getMinuteDifference(localDateTimeB, timeZone) * 60
 
-fun LocalDateTime.getMinuteDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).minutes
+fun LocalDateTime.getMinuteDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int =
+    this.getHourDifference(localDateTimeB, timeZone) * 60
 
-fun LocalDateTime.getHourDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).hours
+fun LocalDateTime.getHourDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int = this.getDayDifference(localDateTimeB, timeZone) * 24
 
-fun LocalDateTime.getDayDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).days
+fun LocalDateTime.getDayDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int =
+    this.toInstant(timeZone).daysUntil(localDateTimeB.toInstant(timeZone), timeZone)
 
-fun LocalDateTime.getMonthDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).months
+fun LocalDateTime.getMonthDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int =
+    this.toInstant(timeZone).monthsUntil(localDateTimeB.toInstant(timeZone), timeZone)
 
-fun LocalDateTime.getYearDifference(localDateTimeB: LocalDateTime): Int =
-    this.getPeriodDifference(localDateTimeB).years
+fun LocalDateTime.getYearDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Int =
+    this.toInstant(timeZone).yearsUntil(localDateTimeB.toInstant(timeZone), timeZone)

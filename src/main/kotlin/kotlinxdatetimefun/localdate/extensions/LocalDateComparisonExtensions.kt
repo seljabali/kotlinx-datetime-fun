@@ -76,11 +76,8 @@ fun LocalDate.isAfterEqualYear(localDateB: LocalDate): Boolean = this.year >= lo
 fun LocalDate.isAfterYear(localDateB: LocalDate): Boolean = this.year > localDateB.year
 // endregion
 
-fun LocalDate.getNanoSecondDifference(localDateB: LocalDate): Int =
-    this.getMilliSecondDifference(localDateB) * 1_000_000
-
-fun LocalDate.getMilliSecondDifference(localDateB: LocalDate): Int =
-    this.getSecondDifference(localDateB) * 1_000
+fun LocalDate.getMilliSecondDifference(localDateB: LocalDate): Long =
+    this.getSecondDifference(localDateB).toLong() * 1_000
 
 fun LocalDate.getSecondDifference(localDateB: LocalDate): Int =
     this.getMinuteDifference(localDateB) * 60

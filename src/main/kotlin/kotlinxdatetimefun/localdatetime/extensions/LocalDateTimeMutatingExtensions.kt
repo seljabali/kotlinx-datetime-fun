@@ -16,6 +16,13 @@ fun LocalDateTime.toLocalDate(): LocalDate = LocalDate(
     dayOfMonth = this.dayOfMonth
 )
 
+fun LocalDateTime.toLocalTime(): LocalTime = LocalTime(
+    hour = this.hour,
+    minute = this.minute,
+    second = this.second,
+    nanosecond = this.nanosecond
+)
+
 fun LocalDateTime.atStartOfDay(): LocalDateTime = LocalDateTime(
     year = this.year,
     monthNumber = this.monthNumber,
@@ -46,12 +53,12 @@ fun LocalDateTime.withLocalTime(localTime: LocalTime): LocalDateTime = LocalDate
     nanosecond = localTime.nanosecond
 )
 
-fun LocalDateTime.minusDays(days: Int, timeZone: TimeZone): LocalDateTime =
+fun LocalDateTime.minusDays(days: Int, timeZone: TimeZone = TimeZone.currentSystemDefault()): LocalDateTime =
     this.toInstant(timeZone)
         .plus(days * -1, DateTimeUnit.DAY, timeZone)
         .toLocalDateTime(timeZone)
 
-fun LocalDateTime.plusDays(days: Int, timeZone: TimeZone): LocalDateTime =
+fun LocalDateTime.plusDays(days: Int, timeZone: TimeZone = TimeZone.currentSystemDefault()): LocalDateTime =
     this.toInstant(timeZone)
         .plus(days, DateTimeUnit.DAY, timeZone)
         .toLocalDateTime(timeZone)
@@ -59,7 +66,7 @@ fun LocalDateTime.plusDays(days: Int, timeZone: TimeZone): LocalDateTime =
 fun LocalDateTime.getLast(
     dayOfWeek: DayOfWeek,
     countingInThisDay: Boolean = false,
-    timeZone: TimeZone
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
 ): LocalDateTime {
     if (countingInThisDay && this.dayOfWeek == dayOfWeek) {
         return this
@@ -77,7 +84,7 @@ fun LocalDateTime.getLast(
 fun LocalDateTime.getNext(
     dayOfWeek: DayOfWeek,
     countingInThisDay: Boolean = false,
-    timeZone: TimeZone
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
 ): LocalDateTime {
     if (countingInThisDay && this.dayOfWeek == dayOfWeek) {
         return this
