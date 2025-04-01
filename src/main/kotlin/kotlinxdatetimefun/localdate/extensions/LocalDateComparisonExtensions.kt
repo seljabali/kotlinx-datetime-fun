@@ -6,8 +6,8 @@ import kotlinx.datetime.monthsUntil
 import kotlinx.datetime.yearsUntil
 
 // region Day Comparisons
-fun LocalDate.compareDay(toDate: LocalDate): Int {
-    val dayDifference = this.getDayDifference(toDate)
+fun LocalDate.compareDay(localDateB: LocalDate): Int {
+    val dayDifference = this.getDayDifference(localDateB)
     return when {
         dayDifference > 0 -> -1
         dayDifference < 0 -> 1
@@ -15,15 +15,15 @@ fun LocalDate.compareDay(toDate: LocalDate): Int {
     }
 }
 
-fun LocalDate.isEqualDay(b: LocalDate): Boolean = compareDay(b) == 0
+fun LocalDate.isEqualDay(localDateB: LocalDate): Boolean = compareDay(localDateB) == 0
 
-fun LocalDate.isBeforeDay(b: LocalDate): Boolean = compareDay(b) < 0
+fun LocalDate.isBeforeDay(localDateB: LocalDate): Boolean = compareDay(localDateB) < 0
 
-fun LocalDate.isBeforeEqualDay(b: LocalDate): Boolean = compareDay(b) <= 0
+fun LocalDate.isBeforeEqualDay(localDateB: LocalDate): Boolean = compareDay(localDateB) <= 0
 
-fun LocalDate.isAfterDay(b: LocalDate): Boolean = compareDay(b) > 0
+fun LocalDate.isAfterDay(localDateB: LocalDate): Boolean = compareDay(localDateB) > 0
 
-fun LocalDate.isAfterEqualDay(b: LocalDate): Boolean = compareDay(b) >= 0
+fun LocalDate.isAfterEqualDay(localDateB: LocalDate): Boolean = compareDay(localDateB) >= 0
 // endregion
 
 // region Month Comparisons
