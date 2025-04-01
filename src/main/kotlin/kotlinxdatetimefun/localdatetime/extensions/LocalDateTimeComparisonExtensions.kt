@@ -8,6 +8,8 @@ import kotlinx.datetime.monthsUntil
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.periodUntil
 import kotlinx.datetime.yearsUntil
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
 // region Day Comparisons
 fun LocalDateTime.compareDay(
@@ -124,22 +126,29 @@ fun LocalDateTime.getPeriodDifference(
 ): DateTimePeriod =
     this.toInstant(timeZone).periodUntil(localDateTimeB.toInstant(timeZone), timeZone)
 
+fun LocalDateTime.getDurationDifference(
+    localDateTimeB: LocalDateTime,
+    timeZone: TimeZone = TimeZone.currentSystemDefault()
+): Duration =
+    localDateTimeB.toInstant(timeZone) - this.toInstant(timeZone)
+
 fun LocalDateTime.getSecondDifference(
     localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Int =
-    this.getMinuteDifference(localDateTimeB, timeZone) * 60
+): Long =
+    this.getDurationDifference(localDateTimeB, timeZone).toLong(DurationUnit.SECONDS)
 
 fun LocalDateTime.getMinuteDifference(
     localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Int =
-    this.getHourDifference(localDateTimeB, timeZone) * 60
+): Long =
+    this.getDurationDifference(localDateTimeB, timeZone).toLong(DurationUnit.MINUTES)
 
 fun LocalDateTime.getHourDifference(
     localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Int = this.getDayDifference(localDateTimeB, timeZone) * 24
+): Long =
+    this.getDurationDifference(localDateTimeB, timeZone).toLong(DurationUnit.HOURS)
 
 fun LocalDateTime.getDayDifference(
     localDateTimeB: LocalDateTime,
