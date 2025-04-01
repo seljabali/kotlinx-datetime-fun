@@ -13,10 +13,10 @@ import kotlin.time.DurationUnit
 
 // region Day Comparisons
 fun LocalDateTime.compareDay(
-    toDate: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
 ): Int {
-    val dayDifference = this.getDayDifference(toDate, timeZone)
+    val dayDifference = this.getDayDifference(localDateTimeB, timeZone)
     return when {
         dayDifference > 0 -> -1
         dayDifference < 0 -> 1
@@ -25,29 +25,29 @@ fun LocalDateTime.compareDay(
 }
 
 fun LocalDateTime.isEqualDay(
-    b: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Boolean = this.compareDay(b, timeZone) == 0
+): Boolean = this.compareDay(localDateTimeB, timeZone) == 0
 
 fun LocalDateTime.isBeforeDay(
-    b: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Boolean = this.compareDay(b, timeZone) < 0
+): Boolean = this.compareDay(localDateTimeB, timeZone) < 0
 
 fun LocalDateTime.isBeforeEqualDay(
-    b: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Boolean = this.compareDay(b, timeZone) <= 0
+): Boolean = this.compareDay(localDateTimeB, timeZone) <= 0
 
 fun LocalDateTime.isAfterDay(
-    b: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Boolean = this.compareDay(b, timeZone) > 0
+): Boolean = this.compareDay(localDateTimeB, timeZone) > 0
 
 fun LocalDateTime.isAfterEqualDay(
-    b: LocalDateTime,
+    localDateTimeB: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault()
-): Boolean = this.compareDay(b, timeZone) >= 0
+): Boolean = this.compareDay(localDateTimeB, timeZone) >= 0
 // endregion
 
 // region Month Comparisons
@@ -107,17 +107,17 @@ fun LocalDateTime.isAfterYear(localDateTimeB: LocalDateTime): Boolean =
 // endregion
 
 // region Time Comparisons
-fun LocalDateTime.compareTime(toDate: LocalDateTime): Int = this.compareTo(toDate)
+fun LocalDateTime.compareTime(localDateTimeB: LocalDateTime): Int = this.compareTo(localDateTimeB)
 
-fun LocalDateTime.isEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) == 0
+fun LocalDateTime.isEqualTime(localDateTimeB: LocalDateTime): Boolean = this.compareTime(localDateTimeB) == 0
 
-fun LocalDateTime.isBeforeTime(b: LocalDateTime): Boolean = this.compareTime(b) < 0
+fun LocalDateTime.isBeforeTime(localDateTimeB: LocalDateTime): Boolean = this.compareTime(localDateTimeB) < 0
 
-fun LocalDateTime.isBeforeEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) <= 0
+fun LocalDateTime.isBeforeEqualTime(localDateTimeB: LocalDateTime): Boolean = this.compareTime(localDateTimeB) <= 0
 
-fun LocalDateTime.isAfterTime(b: LocalDateTime): Boolean = this.compareTime(b) > 0
+fun LocalDateTime.isAfterTime(localDateTimeB: LocalDateTime): Boolean = this.compareTime(localDateTimeB) > 0
 
-fun LocalDateTime.isAfterEqualTime(b: LocalDateTime): Boolean = this.compareTime(b) >= 0
+fun LocalDateTime.isAfterEqualTime(localDateTimeB: LocalDateTime): Boolean = this.compareTime(localDateTimeB) >= 0
 // endregion
 
 fun LocalDateTime.getPeriodDifference(
