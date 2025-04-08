@@ -9,13 +9,119 @@ import kotlinxdatetimefun.localdate.extensions.atStartOfDay
 import kotlinxdatetimefun.localdate.extensions.getLast
 import kotlinxdatetimefun.localdate.extensions.getNext
 import kotlinxdatetimefun.localdate.extensions.minusDays
+import kotlinxdatetimefun.localdate.extensions.minusMonths
+import kotlinxdatetimefun.localdate.extensions.minusYears
 import kotlinxdatetimefun.localdate.extensions.plusDays
+import kotlinxdatetimefun.localdate.extensions.plusMonths
+import kotlinxdatetimefun.localdate.extensions.plusYears
 import kotlinxdatetimefun.localtime.MAX
 import kotlinxdatetimefun.localtime.MIN
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class LocalDateMutatingExtensionsTest {
+
+    @Test
+    fun `test minusMonths with negative months`() {
+        val date = LocalDate(2023, 1, 31)
+        val result = date.minusMonths(-1) // should be same as plus
+        assertEquals(LocalDate(2023, 2, 28), result)
+    }
+
+    @Test
+    fun `test plusMonths with positive months`() {
+        val date = LocalDate(2023, 1, 31)
+        val result = date.plusMonths(1)
+        assertEquals(LocalDate(2023, 2, 28), result)
+    }
+
+    @Test
+    fun `test minusMonths with positive months`() {
+        val date = LocalDate(2023, 1, 31)
+        val result = date.minusMonths(1)
+        assertEquals(LocalDate(2022, 12, 31), result)
+    }
+
+    @Test
+    fun `test plusMonths with negative months`() {
+        val date = LocalDate(2023, 1, 31)
+        val result = date.plusMonths(-1) // should be same as minus
+        assertEquals(LocalDate(2022, 12, 31), result)
+    }
+
+    @Test
+    fun `test minusYears with positive years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.minusYears(1)
+        assertEquals(LocalDate.parse("2022-01-15"), result)
+    }
+
+    @Test
+    fun `test minusYears with zero years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.minusYears(0)
+        assertEquals(date, result)
+    }
+
+    @Test
+    fun `test minusYears with leap year`() {
+        val date = LocalDate.parse("2020-02-29")
+        val result = date.minusYears(4)
+        assertEquals(LocalDate.parse("2016-02-29"), result)
+    }
+
+    @Test
+    fun `test minusYears with negative years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.minusYears(-1)
+        assertEquals(LocalDate.parse("2024-01-15"), result)
+    }
+
+    @Test
+    fun `test plusYears with positive years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.plusYears(1)
+        assertEquals(LocalDate.parse("2024-01-15"), result)
+    }
+
+    @Test
+    fun `test plusYears with zero years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.plusYears(0)
+        assertEquals(date, result)
+    }
+
+    @Test
+    fun `test plusYears with leap year`() {
+        val date = LocalDate.parse("2020-02-29")
+        val result = date.plusYears(1)
+        assertEquals(LocalDate.parse("2021-02-28"), result)
+    }
+
+    @Test
+    fun `test plusYears with negative years`() {
+        val date = LocalDate.parse("2023-01-15")
+        val result = date.plusYears(-1)
+        assertEquals(LocalDate.parse("2022-01-15"), result)
+    }
+
+    @Test
+    fun `test edge case for month operations`() {
+        val date = LocalDate(2023, 3, 31)
+        // Adding 1 month should go to April 30
+        assertEquals(LocalDate(2023, 4, 30), date.plusMonths(1))
+        // Subtracting 1 month should go to February 28
+        assertEquals(LocalDate(2023, 2, 28), date.minusMonths(1))
+    }
+
+    @Test
+    fun `test edge case for year operations`() {
+        val date = LocalDate(2020, 2, 29)
+        // Adding 1 year to leap day should go to Feb 28
+        assertEquals(LocalDate(2021, 2, 28), date.plusYears(1))
+        // Subtracting 4 years should go to another leap day
+        assertEquals(LocalDate(2016, 2, 29), date.minusYears(4))
+    }
 
     @Test
     fun `minusDays subtracts the correct number of days`() {
