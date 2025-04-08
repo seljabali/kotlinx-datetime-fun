@@ -26,7 +26,7 @@ import kotlinxdatetimefun.localdatetime.extensions.withLocalTime
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class LocalDateMutatingExtensionsTest {
+class LocalDateTimeMutatingExtensionsTest {
 
     // Test data
     private val testDateTime = LocalDateTime(
