@@ -10,8 +10,13 @@ import kotlinxdatetimefun.localtime.MAX
 import kotlinxdatetimefun.localtime.MIN
 
 fun LocalDate.minusDays(days: Int): LocalDate = this.plus(days * -1, DateTimeUnit.DAY)
-
 fun LocalDate.plusDays(days: Int): LocalDate = this.plus(days, DateTimeUnit.DAY)
+
+fun LocalDate.minusMonths(months: Int): LocalDate = this.plus(months * -1, DateTimeUnit.MONTH)
+fun LocalDate.plusMonths(months: Int): LocalDate = this.plus(months, DateTimeUnit.MONTH)
+
+fun LocalDate.minusYears(years: Int): LocalDate = this.plus(years * -1, DateTimeUnit.YEAR)
+fun LocalDate.plusYears(years: Int): LocalDate = this.plus(years, DateTimeUnit.YEAR)
 
 fun LocalDate.getLast(dayOfWeek: DayOfWeek, countingInThisDay: Boolean = false): LocalDate {
     if (countingInThisDay && this.dayOfWeek == dayOfWeek) {
