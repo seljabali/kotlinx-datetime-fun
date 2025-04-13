@@ -1,4 +1,5 @@
-<h3 align="center"><strong>Kotlinx DateTime extension functions.</strong></h3>
+<h3 align="center"><strong>Kotlinx DateTime Fun</strong></h3>
+<p align="center">Kotlinx DateTime extension functions.</p>
 <p align="center">
   <a href="https://github.com/seljabali/kotlinx-datetime-fun/actions?query=branch%3Amain"><img alt="Build Status" src="https://github.com/seljabali/kotlinx-datetime-fun/actions/workflows/main.yml/badge.svg"/></a>
 </p> <br>
@@ -20,8 +21,9 @@
 + val result = date.minusDays(days)
 ```
 
-## What's In It?
-#### 1. Parsing
+## Features
+### Parsing
+_Convert strings into Kotlinx DateTime objects with ease_
 ```kotlin
 // Provided time
 val result = "01:30 AM".toLocalTime()
@@ -32,12 +34,9 @@ val result = "2021-06-07".toLocalDate()
 // Provided ambiguous date formats
 val result = "06/07/2021".toLocalDateTime(format = "MM/dd/yyyy")
 ```
-#### 2. Creation
-```kotlin
-val result = LocalDateTime.of(year = 2024, month = 12, dayOfMonth= 30)
-```
 
-#### 3. Comparisons
+### Comparisons
+_Compare dates and times at various granularities_
 ```kotlin
 // Year
 val result = dateA.compareYear(dateB)
@@ -59,29 +58,29 @@ val result = dateA.getMinuteDifference(dateB)
 val result = dateA.isAfterEqualTime(dateB)
 ```
 
-#### 4. Print
+### Formatting
+_Print dates and times using a custom format_
 ```kotlin
 val date = "2021-07-06".toLocalDate()
 val result = date.print(format = "MM/dd/yyyy")
 ```
 
-#### 5. Attributes
+### Attributes & Mutations
+_Query and transform date/time attributes_
 ```kotlin
 val result = date.isAtStartOfDay()
 val result = date.getDaysInMonth()
-```
 
-#### 6. Mutations
-```kotlin
 val result = date.getLast(DayOfWeek.FRIDAY)
 val result = date.getNext(DayOfWeek.MONDAY)
 ```
 
-#### 7. Preset Dates
+### Preset Dates
+_Quickly access commonly used dates_
 ```kotlin
 val result = LocalTime.now()
-val result = LocalDateTime.yesterday()
 val result = LocalDate.startOfYear()
+val result = LocalDateTime.yesterday()
 ```
 
 ## Install
