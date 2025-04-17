@@ -83,19 +83,5 @@ val result = LocalDate.startOfYear()
 val result = LocalDateTime.yesterday()
 ```
 
-## Install
-Add to module `build.gradle`:
-```gradle
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-  implementation("org.eljabali.sami.kotlinxdatetimefun:kotlinxdatetimefun:0.0.1")
-}  
-```
-
-</details>
-
 ## Find this library useful? 😏
 Star this repository __[as others have](https://github.com/seljabali/kotlinx-datetime-fun/stargazers)__. ⭐️ <br>
