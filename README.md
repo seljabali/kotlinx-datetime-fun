@@ -1,3 +1,7 @@
+<p align="center" >
+   <img src="screenshots/logo.png" width=300px alt="SwiftDate" title="Kotlinx DateTime Fun">
+ </p>
+
 <h3 align="center"><strong>Kotlinx DateTime Fun</strong></h3>
 <p align="center">Kotlinx DateTime extension functions.</p>
 <p align="center">
