@@ -1,7 +1,13 @@
+<p align="center" >
+   <img src="screenshots/logo.png" width=300px alt="SwiftDate" title="Kotlinx DateTime Fun">
+ </p>
+
 <h3 align="center"><strong>Kotlinx DateTime Fun</strong></h3>
 <p align="center">Kotlinx DateTime extension functions.</p>
 <p align="center">
   <a href="https://github.com/seljabali/kotlinx-datetime-fun/actions?query=branch%3Amain"><img alt="Build Status" src="https://github.com/seljabali/kotlinx-datetime-fun/actions/workflows/main.yml/badge.svg"/></a>
+  <a href="https://repo1.maven.org/maven2/org/eljabali/sami/kotlinxdatetimefun/kotlinxdatetimefun/"><img alt="Maven Central" src="https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Forg%2Feljabali%2Fsami%kotlinxdatetimefun%kotlinxdatetimefun%2Fmaven-metadata.xml"/></a>
+  <a href="https://kotlinlang.org"><img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.1.21-orange.svg?style=flat&logo=kotlin"/></a>
 </p> <br>
 
 ```diff
@@ -81,6 +87,18 @@ _Quickly access commonly used dates_
 val result = LocalTime.now()
 val result = LocalDate.startOfYear()
 val result = LocalDateTime.yesterday()
+```
+
+## Installation
+Add the following to your module’s `build.gradle`:
+```gradle
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation("org.eljabali.sami.kotlinxdatetimefun:kotlinxdatetimefun:0.0.1")
+}  
 ```
 
 ## Find this library useful? 😏
